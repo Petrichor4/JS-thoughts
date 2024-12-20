@@ -1,7 +1,14 @@
-import { Schema, model } from 'mongoose';
+import { ObjectId, Schema, model, Document } from "mongoose";
 // import bcrypt from 'bcrypt';
 
-const userSchema = new Schema({
+interface IUser extends Document {
+  username: string;
+  email: string;
+  friends: ObjectId[];
+  thoughts: ObjectId[];
+}
+
+const userSchema = new Schema<IUser>({
   username: {
     type: String,
     required: true,
@@ -12,34 +19,33 @@ const userSchema = new Schema({
     type: String,
     required: true,
     unique: true,
-    match: [/.+@.+\..+/, 'Must match an email address!'],
+    match: [/.+@.+\..+/, "Must match an email address!"],
   },
-  password: {
-    type: String,
-    required: true,
-    minlength: 5,
-  },
+  friends: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
   thoughts: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Thought',
+      ref: "Thought",
     },
   ],
+},
+{
+  toJSON: {
+    virtuals: true,
+  },
+  id: false,
 });
 
-// userSchema.pre('save', async function (next) {
-//   if (this.isNew || this.isModified('password')) {
-//     const saltRounds = 10;
-//     this.password = await bcrypt.hash(this.password, saltRounds);
-//   }
+userSchema.virtual('frienCount')
+.get(function () {
+  return this.friends.length
+})
 
-//   next();
-// });
+const User = model("User", userSchema);
 
-// userSchema.methods.isCorrectPassword = async function (password) {
-//   return bcrypt.compare(password, this.password);
-// };
-
-const User = model('User', userSchema);
-
-module.exports = User;
+export default User;
