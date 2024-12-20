@@ -1,0 +1,3 @@
+import { }
+
+export default thoughtRoutes

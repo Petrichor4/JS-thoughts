@@ -1,0 +1,55 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# OS or Editor files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.swn
+*.swn1
+*.un~
+*.vimrc
+
+# Vite
+dist/
+.vite/
+.env
+.env.*
+*.local
+
+# TypeScript
+*.tsbuildinfo
+
+# Sequelize
+sequelize-meta.json
+
+# Optional: coverage files from testing
+coverage/
+*.lcov
+
+# Build artifacts
+build/
+
+# IDE files
+.idea/
+*.iml
+.vscode/
