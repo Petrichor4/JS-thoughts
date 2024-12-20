@@ -34,3 +34,5 @@ const reactionSchema = new Schema<IReaction>(
         id: false,
     }
 )
+
+export default reactionSchema
